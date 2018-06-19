@@ -19,8 +19,12 @@ from time import sleep
 # Helper functions derived from csv_test.py -- Generator
 def csvData(file_name):
     ''' Takes CSV file and returns its content through an iterator.
-        params: file_name   : Path to CSV
-        returns: yields next line in file
+
+    Args:
+        file_name: Path to CSV
+
+    Returns:
+        yields next line in file
     '''
 
     with open(file_name) as csvFile:
@@ -32,8 +36,11 @@ def clean_phone_data(data):
     '''  Takes an iterable object from the CSV file and creates a list of
          all users and phone numbers to be saniticed.
 
-         params: data   : iterable object
-         return: List of lists of users, phone numbers
+    Args:
+        data: iterable object
+
+    Returns:
+        data: List of lists of users, phone numbers
     '''
 
     # Using list comprehension to generate new list with strings split
@@ -71,8 +78,11 @@ def build_dict(phone_list):
         Create new list with new [email, body] format
         format: body ={'phones': [{'type': 'mobile', 'value': '7601234567'}]}
 
-        params: phone_list  : list of lists
-        return: list of lists [ str , dict ]
+    Args:
+        phone_list: list of lists
+
+    Returns:
+        phone_list: list of lists [ str , dict ]
     '''
 
     for user in phone_list:
