@@ -18,17 +18,24 @@ from time import sleep
 
 # Helper functions derived from csv_test.py -- Generator
 def csvData(file_name):
-        # open csv file and load content into lost for processing
-        # returns iterator
+    ''' Takes CSV file and returns its content through an iterator.
+        params: file_name   : Path to CSV
+        returns: yields next line in file
+    '''
+
     with open(file_name) as csvFile:
         for line in csvFile.readlines():
             yield line
 
-    # List comes in ['username, ###-###\n',...] format
-    # This neesds to be split and phone number formatted
-    # \n needs to be removed form the end of the number
 
 def clean_phone_data(data):
+    '''  Takes an iterable object from the CSV file and creates a list of
+         all users and phone numbers to be saniticed.
+
+         params: data   : iterable object
+         return: List of lists of users, phone numbers
+    '''
+
     # Using list comprehension to generate new list with strings split
     data = [user.split(',') for user in data]
 
@@ -60,14 +67,21 @@ def clean_phone_data(data):
     return data
 
 def build_dict(phone_list):
-    # iterate through the new list of [user, phone #] entries
-    # Create new list with new [email, body] format
-    # format: body ={'phones': [{'type': 'mobile', 'value': '7601234567'}]}
+    ''' iterate through the new list of [user, phone #] entries
+        Create new list with new [email, body] format
+        format: body ={'phones': [{'type': 'mobile', 'value': '7601234567'}]}
+
+        params: phone_list  : list of lists
+        return: list of lists [ str , dict ]
+    '''
+
     for user in phone_list:
         user[1] = {'phones': [{'type': 'mobile' , 'value': user[1]}]}
     return phone_list
 
 def get_service():
+    ''' Boilerplate from google to access API '''
+
     # Setup the Admin SDK Directory API
 
     # Admin SDK directory scope for users
